@@ -1,5 +1,6 @@
 pub mod arr2;
 pub mod dir;
+pub mod dsu;
 pub mod matching;
 pub mod num;
 pub mod parsing;
