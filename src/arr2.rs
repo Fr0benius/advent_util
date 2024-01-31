@@ -60,6 +60,10 @@ impl<T: Clone> Arr2<T> {
             v: vec![x; n * m],
         }
     }
+    pub fn transpose(&self) -> Self {
+        let (n, m) = self.dims();
+        Self::from_fn(m, n, |i, j| self[j][i].clone())
+    }
 }
 
 impl<T> Index<usize> for Arr2<T> {
