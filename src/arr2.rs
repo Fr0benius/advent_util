@@ -100,6 +100,21 @@ impl<T> IntoIterator for Arr2<T> {
     }
 }
 
+impl Arr2<u8> {
+    /// Creates a 2D byte array from a blob of text.
+    /// Lines have to be the same length.
+    pub fn from_blob(s: &str) -> Self {
+        let lines: Vec<_> = s.lines().map(|l| l.as_bytes()).collect();
+        let n = lines.len();
+        let m = lines[0].len();
+        assert!(
+            lines.iter().all(|&line| line.len() == m),
+            "Line lengths not equal"
+        );
+        Self::from_fn(n, m, |i, j| lines[i][j])
+    }
+}
+
 impl<T: Clone> From<Vec<Vec<T>>> for Arr2<T> {
     fn from(v: Vec<Vec<T>>) -> Self {
         let n = v.len();
