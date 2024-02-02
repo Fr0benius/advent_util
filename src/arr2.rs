@@ -117,6 +117,16 @@ impl Arr2<u8> {
         );
         Self::from_fn(n, m, |i, j| lines[i][j])
     }
+    pub fn to_blob(&self) -> String {
+        let mut v = Vec::with_capacity(self.n * self.m + self.n - 1);
+        for i in 0..self.n {
+            for j in 0..self.m {
+                v.push(self[i][j] as char);
+            }
+            v.push('\n');
+        }
+        v.into_iter().collect()
+    }
 }
 
 impl<T: Clone> From<Vec<Vec<T>>> for Arr2<T> {
